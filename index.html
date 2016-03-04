@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Service Worker with IndexedDB Demo" />
+    <title>Service Worker with IndexedDB Demo</title>
+    <style type="text/css">
+      body {
+        margin: 40px auto;
+        max-width: 800px;
+        line-height: 1.4;
+        font-size: 18px;
+        color: #333;
+        padding: 0 10px;
+      }
+      h1, h2, h3 {
+        line-height: 1.2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <article>
+      <h1>Service Worker with IndexedDB Demo</h1>
+
+      <section>
+        <p>
+          In <a href="https://github.com/KlausTrainer/service-worker-indexed-db-demo">this demo</a>, the below image is stored in IndexedDB when the service worker is installed. When the service worker is active, the image will be fetched from IndexedDB store when it is requested.
+        </p>
+      </section>
+
+      <section>
+        <h2>If There Wasn't That Issue with Firefox…</h2>
+        <p>
+          This works in Chromium (and Chrome), but currently not in Firefox. And yes, it's supposed to work in Firefox as well. When the service worker is active, and the page gets (re-)loaded, Firefox is throwing an error with the following message (unfortunately there's no additional information in the console error log):
+          <p><code>A ServiceWorker intercepted the request and encountered an unexpected error.</code></p>
+        </p>
+
+        <section>
+          <h3>Here the Image:</h3>
+          <figure>
+            <img src="explore.jpg" alt="You are supposed to be seeing a image here." />
+          </figure>
+        </section>
+
+        <section>
+          <h3>Issue Report</h3>
+          <p>The issue is filed in the Firefox issue tracker as <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1253777">bug 1253777</a>.
+        </section>
+      </section>
+
+      <section>
+        <h2>Workaround for Firefox</h2>
+        For Firefox versions 46 or greater, there's a <a href="https://github.com/KlausTrainer/service-worker-indexed-db-demo/blob/47725fba243f8aeef2788647f9617281c1beb816/service-worker.js#L92">workaround</a> that copies the image <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob"><code>Blob</code></a> to an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer"><code>ArrayBuffer</code></a>. The workaround is only available from Firefox version 46 or greater because it uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader"><code>FileReader</code></a>, which isn't supported in workers in prior versions.
+      </section>
+
+      <section>
+        <h2>Source Code</h2>
+        The source code is available <a href="https://github.com/KlausTrainer/service-worker-indexed-db-demo">here</a> under the terms of the Apache License Version 2.0.
+      </section>
+    </article>
+
+    <script src="service-worker.js"></script>
+    <script src="service-worker-installer.js"></script>
+  </body>
+</html>
