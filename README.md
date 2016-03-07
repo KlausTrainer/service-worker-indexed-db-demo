@@ -20,7 +20,7 @@ information in the console error log):
 
 ### Here the Image:
 
-![You are supposed to be seeing a image here.](explore.jpg)
+![You are supposed to be seeing an image here.](explore.jpg)
 
 ### Issue Report
 
